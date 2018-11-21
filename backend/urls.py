@@ -17,6 +17,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework_jwt.views import refresh_jwt_token
 from login.views import FacebookLogin, FacebookConnect
+from django.conf.urls.static import static
+from  django.conf import settings
+
 from rest_auth.registration.views import (
     SocialAccountListView, SocialAccountDisconnectView
 )
@@ -32,4 +35,4 @@ urlpatterns = [
     url(r'^socialaccounts/(?P<pk>\d+)/disconnect/$', SocialAccountDisconnectView.as_view(), name='social_account_disconnect'),
     url(r'^', include('usuarios.urls')),
     url(r'^', include('utilities.urls')),
-]
+] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

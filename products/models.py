@@ -5,7 +5,7 @@ from django.db import models
 import uuid
 from django.contrib.auth.models import User
 
-class UnitMeasurement(models.Model): 
+class UnitMeasurement(models.Model):
     id_measure = models.AutoField(primary_key=True)
     name_measure = models.CharField(max_length=40)
     def __str__(self):
@@ -41,4 +41,4 @@ class Product(models.Model):
 
 class ImagesProduct(models.Model):
     product_id = models.ForeignKey(Product, related_name='images_products')
-    image = models.ImageField(upload_to="media/images_products")
+    image = models.ImageField(upload_to="/images_products")
