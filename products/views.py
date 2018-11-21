@@ -16,10 +16,16 @@ class ListBrands(APIView):
 		return Response(brands_json.data)
 
 class ListCategories(APIView):
+	#permission_classes = (permissions.AllowAny,)
 	def get(self, request):
 		categories = Category.objects.all()
-		categories_json = CategoriesSerializer(categories, many=True)
-		return Response(categories_json.data)
+		details_category = {}
+		any_categories = []
+		for category in categories:
+			count = Product.objects.filter(category_id = category.id_category).count()
+			details_category = {"id": category.id_category, "category": category.name_category, "products": count}
+		any_categories.append(details_category)
+		return Response(any_categories)
 
 class ListProducts(APIView):
 	def get(self, request):
@@ -36,7 +42,7 @@ class DetailProduct(APIView):
 	def put(self, request, uuid):
 		product = Product.objects.filter(id_product = uuid).first()
 		product_json = ProductsSerializer(product, data=request.data)
-		if product_json.is_valid(): 
+		if product_json.is_valid():
 			product_json.save()
 			return Response(product_json.data)
 		return Response(product_json.data.errors, status=400)
