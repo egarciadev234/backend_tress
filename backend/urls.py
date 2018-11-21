@@ -35,4 +35,5 @@ urlpatterns = [
     url(r'^socialaccounts/(?P<pk>\d+)/disconnect/$', SocialAccountDisconnectView.as_view(), name='social_account_disconnect'),
     url(r'^', include('usuarios.urls')),
     url(r'^', include('utilities.urls')),
+    url(r'^', include('products.urls')),
 ] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -22,7 +22,7 @@ class Brand(models.Model):
     id_brand = models.AutoField(primary_key=True)
     name_brand = models.CharField(max_length=250)
     description_brand = models.TextField()
-    logo = models.ImageField(upload_to="media/logos")
+    logo = models.ImageField(upload_to="logos")
     def __str__(self):
         return self.name_brand
 
@@ -41,4 +41,4 @@ class Product(models.Model):
 
 class ImagesProduct(models.Model):
     product_id = models.ForeignKey(Product, related_name='images_products')
-    image = models.ImageField(upload_to="/images_products")
+    image = models.ImageField(upload_to="images_products")
